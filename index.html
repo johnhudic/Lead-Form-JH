@@ -96,7 +96,7 @@
         @media (max-width: 480px) {
             .form-container {
                 padding: 20px;
-                max-width: 90%;
+                max-width: 100%;
             }
         }
     </style>
@@ -125,7 +125,6 @@
         <h1>Contact Us</h1>
         <p class="description">
             Please fill out the form below, and we’ll get back to you as soon as possible.
-            Your information will remain confidential and will not be shared with third parties.
         </p>
         <form id="leadForm" action="https://formspree.io/f/mvggdkpy" method="POST">
             <label for="name">Name:</label>
@@ -137,8 +136,8 @@
             <label for="phone">Phone:</label>
             <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" aria-label="Phone Number" required>
 
-            <label for="description">Description:</label>
-            <textarea id="description" name="description" placeholder="Describe what you're looking for..." required></textarea>
+            <label for="description" id="descriptionLabel">Description:</label>
+            <textarea id="description" name="description" placeholder="Describe what you're looking for..." aria-describedby="descriptionLabel" required></textarea>
 
             <button type="submit">Submit</button>
         </form>
@@ -147,7 +146,11 @@
     <!-- Form Submit Tracking -->
     <script>
         document.getElementById('leadForm').addEventListener('submit', function () {
-            fbq('track', 'Lead'); // Trigger Meta Pixel 'Lead' event
+            try {
+                fbq('track', 'Lead'); // Trigger Meta Pixel 'Lead' event
+            } catch (error) {
+                console.error('Meta Pixel tracking failed:', error);
+            }
         });
     </script>
 </body>
