@@ -19,7 +19,7 @@
 
         .form-container {
             background: #ffffff;
-            padding: 20px 25px; /* Adjusted padding for better fit */
+            padding: 20px 25px;
             border-radius: 10px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             max-width: 400px;
@@ -51,15 +51,15 @@
 
         .form-container input,
         .form-container textarea {
-            width: 100%; /* Ensures fields span the container */
-            padding: 8px 10px; /* Reduced padding for smaller fields */
-            margin: 10px 0; /* Spacing between fields */
+            width: 100%;
+            padding: 8px 10px;
+            margin: 10px 0;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 14px;
             outline: none;
             transition: border-color 0.3s ease;
-            box-sizing: border-box; /* Ensures padding fits inside width */
+            box-sizing: border-box;
         }
 
         .form-container input:focus,
@@ -68,16 +68,15 @@
             box-shadow: 0 0 5px rgba(106, 17, 203, 0.3);
         }
 
-        /* Style for Placeholder Text */
         .form-container input::placeholder,
         .form-container textarea::placeholder {
-            font-size: 12px; /* Smaller font size */
-            color: #888; /* Lighter gray for subtle appearance */
+            font-size: 12px;
+            color: #888;
         }
 
         .form-container textarea {
             resize: vertical;
-            min-height: 100px; /* Increased height for better usability */
+            min-height: 100px;
         }
 
         .form-container button {
@@ -108,29 +107,47 @@
             }
 
             .form-container h1 {
-                font-size: 20px; /* Adjusted for smaller screens */
+                font-size: 20px;
             }
 
             .form-container input,
             .form-container textarea {
-                font-size: 13px; /* Smaller font size for fields */
-                padding: 6px 8px; /* Reduced padding */
+                font-size: 13px;
+                padding: 6px 8px;
             }
 
             .form-container button {
-                font-size: 14px; /* Smaller button text */
-                padding: 8px 10px; /* Reduced button padding */
+                font-size: 14px;
+                padding: 8px 10px;
             }
         }
     </style>
+
+    <!-- Meta Pixel Base Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window,document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1251925399218236'); // Replace with your Meta Pixel ID
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=1251925399218236&ev=PageView&noscript=1"/>
+    </noscript>
 </head>
 <body>
     <!-- Form Container -->
     <div class="form-container">
         <h1>Contact Us</h1>
         <p class="description">
-            Thank you for you interest in my work!
             Please fill out the form below, and we’ll get back to you as soon as possible.
+            Your information will remain confidential and will not be shared with third parties.
         </p>
         <form id="leadForm" action="https://formspree.io/f/mvggdkpy" method="POST">
             <label for="name">Name:</label>
@@ -139,11 +156,25 @@
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" placeholder="Enter your email address" aria-label="Email" required>
 
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" aria-label="Phone Number" required>
+
             <label for="description">Description:</label>
-            <textarea id="description" name="description" placeholder="Your Tattoo Idea" required></textarea>
+            <textarea id="description" name="description" placeholder="Describe what you're looking for..." required></textarea>
 
             <button type="submit">Submit</button>
         </form>
     </div>
+
+    <!-- Form Submit Tracking -->
+    <script>
+        document.getElementById('leadForm').addEventListener('submit', function () {
+            try {
+                fbq('track', 'Lead'); // Trigger Meta Pixel 'Lead' event
+            } catch (error) {
+                console.error('Meta Pixel tracking failed:', error);
+            }
+        });
+    </script>
 </body>
 </html>
